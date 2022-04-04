@@ -55,9 +55,21 @@ router.post('/sign-up', (req, res, next) => {
 		// send the new user object back with status 201, but `hashedPassword`
 		// won't be send because of the `transform` in the User model
 		.then((user) => res.status(201).json({ user: user.toObject() }))
+		.then((order) => {
+			// send a successful response like this
+			res.status(201).json({ order: order.toObject() })
+		})
 		// pass any errors along to the error handler
 		.catch(next)
 })
+
+    // Order.create(req.body.order)
+    //     .then((order) => {
+    //         // send a successful response like this
+    //         res.status(201).json({ order: order.toObject() })
+    //     })
+    //     // if an error occurs, pass it to the error handler
+    //     .catch(next)
 
 // SIGN IN
 // POST /sign-in
@@ -98,6 +110,7 @@ router.post('/sign-in', (req, res, next) => {
 		})
 		.catch(next)
 })
+
 
 // CHANGE password
 // PATCH /change-password

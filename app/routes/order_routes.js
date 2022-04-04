@@ -49,19 +49,19 @@ router.get('/orders', requireToken, (req,res,next) => {
     console.log('this is req.user', req.user._id)
     req.body.owner = req.user._id
     
-    Order.find()
+    // Order.find()
         //this will populate items in the users current cart
-        .populate('productsOrdered')
-        //once populated, if there are items in the users cart we will load them
-        // `orders` will be an array of Mongoose documents
         // .populate('productsOrdered')
-        // we want to convert each one to a POJO, so we use `.map` to
-        // apply `.toObject` to each one
-        .then(orders => {
-            return orders.productsOrdered.map(order => order.toObject())
-        })
-        .then(orders=> res.status(200).json({orders:orders}))
-        .catch(next)
+        // //once populated, if there are items in the users cart we will load them
+        // // `orders` will be an array of Mongoose documents
+        // // .populate('productsOrdered')
+        // // we want to convert each one to a POJO, so we use `.map` to
+        // // apply `.toObject` to each one
+        // .then(orders => {
+        //     return orders.productsOrdered.map(order => order.toObject())
+        // })
+        // .then(orders=> res.status(200).json({orders:orders}))
+        // .catch(next)
 })
 
 //Show Route for showing items in individuals cart
@@ -114,13 +114,6 @@ router.post('/orders/:productId', requireToken, (req, res, next) => {
         .catch(next)
 
     // This adds an order manually through postman
-    // Order.create(req.body.order)
-    //     .then((order) => {
-    //         // send a successful response like this
-    //         res.status(201).json({ order: order.toObject() })
-    //     })
-    //     // if an error occurs, pass it to the error handler
-    //     .catch(next)
     })
 
 
